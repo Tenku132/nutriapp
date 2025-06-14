@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use App\Models\Order;
+
+class NewOrderNotification extends Notification
+{
+    use Queueable;
+
+    protected $order;
+
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+
+    public function via($notifiable)
+    {
+        return ['database'];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'message' => 'New order placed by ' . ($this->order->buyer->name ?? 'Unknown Buyer') .
+                         ': ' . $this->order->quantity . ' x ₱' . number_format($this->order->price, 2) .
+                         ' = ₱' . number_format($this->order->total_price, 2),
+            'icon'    => 'bi-cart-check',
+            'type'    => 'order',
+            'order_id' => $this->order->id,
+            'link'    => route('admin.orders.show', $this->order->id),
+        ];
+    }
+}

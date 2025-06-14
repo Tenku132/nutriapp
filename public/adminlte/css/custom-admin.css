@@ -1,0 +1,906 @@
+/* === Custom Admin CSS === */
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* You can adjust: 100–900 */
+  font-style: normal;
+}
+
+/* ----------------------------------------
+   SECTION 0: Sidebar (Rounded + Modern)
+---------------------------------------- */
+aside {
+  width: 240px;
+  background-color: #ffffff;
+  border-top-left-radius: 1.5rem;         /* ✅ ADD THIS */
+  border-bottom-left-radius: 1.5rem;      /* ✅ ADD THIS */
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+
+aside .nav-link {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+aside .nav-link i {
+  margin-right: 10px;
+}
+
+
+aside .nav-link:hover {
+  background-color: #f0f2f5;
+  color: #28a745 !important;
+}
+
+aside .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+aside .dropdown-toggle:hover {
+  background-color: #f5f5f5;
+}
+
+aside .dropdown-menu {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ----------------------------------------
+   SECTION 1: Dashboard Cards
+---------------------------------------- */
+/* Dashboard Metric Cards Inspired by Modern UI */
+.dashboard-metric {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+.dashboard-metric:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+
+/* Color Soft Backgrounds */
+/* Force soft background colors to take effect */
+.card.bg-soft-blue {
+    background-color: #e5e9ff !important;
+}
+.card.bg-soft-green {
+    background-color: #e1f7e8 !important;
+}
+.card.bg-soft-yellow {
+    background-color: #fff4d6 !important;
+}
+.card.bg-soft-pink {
+    background-color: #fce4ec !important;
+}
+
+
+
+
+
+/* ----------------------------------------
+   SECTION 1.1: ADMIN BODY BACKGROUND
+---------------------------------------- */
+.admin-body-bg {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #4c6155 0%, #64776C 40%, #AABEB3 100%);
+  min-height: 100vh;
+  transition: background 0.4s ease;
+}
+
+/* ----------------------------------------
+   SECTION 1.2: Topbar Styling
+---------------------------------------- */
+.admin-topbar {
+  position: relative;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.25rem; /* TOP-BOTTOM | LEFT-RIGHT */
+  overflow: visible;
+  max-width: 100%;
+  z-index: 1030;
+}
+
+
+.admin-topbar .form-control {
+  background-color: #f4f4f4;
+  border: none;
+}
+
+.admin-topbar input::placeholder {
+  color: #999;
+}
+
+.admin-topbar .user-name {
+  white-space: nowrap;
+  font-weight: 600;
+  color: #212529;
+}
+
+#sidebarToggle {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+  margin-top: 2px;
+  width: 36px;
+  height: 36px;
+}
+
+#sidebarToggle:hover {
+  background-color: #e0e0e0;
+}
+
+.admin-topbar .d-flex.align-items-center {
+  gap: 1rem;
+}
+
+/* ✅ Clean & unified: Notification Bell */
+.notif-bell {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.notif-bell i {
+  font-size: 1.25rem;
+  color: #212529;
+}
+
+.notif-bell .badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  background-color: #ffc107;
+  color: #000;
+  border-radius: 50%;
+  line-height: 1;
+  min-width: 18px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ✅ Notification Dropdown Styling */
+.admin-topbar .dropdown-menu {
+  font-size: 0.9rem;
+  border-radius: 10px;
+  min-width: 280px;
+  max-width: 320px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-topbar .dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+.admin-topbar .dropdown-item {
+  white-space: normal;
+}
+
+
+
+.admin-topbar .dropdown-toggle {
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.admin-topbar img.rounded-circle {
+  object-fit: cover;
+  width: 36px;
+  height: 36px;
+}
+
+
+/* ----------------------------------------
+   Responsive: Prevent wrapping and overflow
+---------------------------------------- */
+@media (max-width: 768px) {
+  .admin-topbar .form-control {
+    font-size: 0.875rem;
+  }
+
+  #sidebarToggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .admin-topbar .badge {
+    font-size: 0.65rem;
+    padding: 3px 5px;
+  }
+
+  .admin-topbar .dropdown-toggle span {
+    display: none;
+  }
+}
+
+/* Optional: Dark skin support */
+.admin-dark-skin h1,
+.admin-dark-skin h2,
+.admin-dark-skin h3,
+.admin-dark-skin h4,
+.admin-dark-skin h5,
+.admin-dark-skin h6,
+.admin-dark-skin label,
+.admin-dark-skin .form-label {
+  color: white !important;
+}
+
+
+
+
+/* ----------------------------------------
+   SECTION 2: Product Table Layout
+---------------------------------------- */
+.custom-product-table th {
+  font-weight: 600;
+  color: #555;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.custom-product-table td {
+  vertical-align: middle;
+  padding: 12px 8px;
+}
+
+.product-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+
+
+/* ----------------------------------------
+   SECTION 3: Badges (Stock, Role, Status)
+---------------------------------------- */
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* ✅ SECTION 3.1: Status Badge Variants for Order Status (User-Side + Admin-Side) */
+.badge-status.pending {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.badge-status.to-ship {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.badge-status.completed {
+  background-color: #198754;
+  color: #fff;
+}
+
+.badge-status.cancelled {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.badge-status.return-refund {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+
+/* ----------------------------------------
+   SECTION 4: Card Containers (Tables, Forms)
+---------------------------------------- */
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: visible !important;
+  position: relative;
+}
+
+
+.card .table,
+.card .table tbody td,
+.card .table-hover tbody tr:hover {
+    background-color: #ffffff !important;
+    /* overflow: visible !important; */
+}
+
+thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-rounded {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.table-rounded thead {
+  background-color: transparent;
+}
+.table-rounded thead th {
+  background-color: #f8f9fa;
+}
+
+.table-rounded thead th:first-child {
+  border-top-left-radius: 10px !important;
+
+}
+.table-rounded thead th:last-child {
+  border-top-right-radius: 10px !important;
+
+}
+
+.table.table-rounded {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden;
+}
+
+.card .table-rounded {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+/* ----------------------------------------
+   SECTION 5: Buttons (Custom for Consistency)
+---------------------------------------- */
+
+/* Refined utility button shell */
+.btn-utility {
+  font-weight: 500;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  min-width: 120px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* NEW High-Contrast Functional Colors */
+.btn-search {
+  background-color: #3887BE;
+}
+.btn-search:hover {
+  background-color: #2f74a2;
+}
+
+.btn-reset {
+  background-color: #6C757D;
+  color: white;
+  font-weight: 500;
+  padding: 10px 18px;      
+  font-size: 0.95rem;
+  border-radius: 8px;
+  min-width: 120px;
+  height: 42px;           
+  display: inline-flex;    
+  align-items: center;      
+  justify-content: center;  
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-reset:hover {
+  background-color: #5a6268;
+  color: rgb(49, 49, 49);
+}
+
+.btn-export {
+  background-color: #2CA58D;
+}
+.btn-export:hover {
+  background-color: #228674;
+}
+
+.btn-add-product {
+  background-color: #218739;
+  white-space: nowrap;
+  color: white;
+} 
+.btn-add-product:hover {
+  background-color: #18692d;
+  color: rgb(2, 2, 2);
+}
+
+/* ✅ Section X: Ban Button */
+.btn-ban-user {
+  background-color: #dc3545;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+.btn-ban-user:hover {
+  background-color: #bb2d3b;
+  color: #fff;
+}
+
+
+
+/* Optional: hover glow */
+.btn-utility:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+/* ----------------------------------------
+   SECTION 6: Forms (Add/Edit Product/User)
+---------------------------------------- */
+label.form-label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.95rem;
+  box-shadow: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #2684ff;
+  box-shadow: 0 0 0 0.2rem rgba(38, 132, 255, 0.25);
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+
+select.form-select {
+  padding-right: 2rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='gray'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+button.badge {
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.pagination {
+  margin-bottom: 0;
+}
+
+
+/* ----------------------------------------
+   SECTION 7: User Avatars (Rounded Images)
+---------------------------------------- */
+img.rounded-circle {
+  object-fit: cover;
+  border: 1px solid #ddd;
+  width: 40px;
+  height: 40px;
+}
+
+
+/* ----------------------------------------
+   SECTION 8: Roles
+---------------------------------------- */
+.role-badge {
+  color: #fff;
+  padding: 0.35em 0.6em;
+  border-radius: 0.5rem;
+  font-size: 0.80rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.role-admin {
+  background-color: #007bff;
+}
+.role-farmer {
+  background-color: #17a859;
+}
+.role-buyer {
+  background-color: #d16a0a;
+}
+
+
+/* ----------------------------------------
+   SECTION 9: Admin Login Page (Revised)
+---------------------------------------- */
+body.login-page {
+  background-color: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.nutri-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e4e4e4, #ffffff);
+  padding: 2rem;
+}
+.nutri-login-box {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  max-width: 960px;
+  width: 100%;
+  overflow: hidden;
+}
+.nutri-login-sidebar {
+  flex: 1 1 50%;
+  background: linear-gradient(135deg, #d2dbf0, #c5efe2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+.nutri-login-sidebar img {
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.nutri-login-sidebar h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #348a37;
+}
+.nutri-login-sidebar p {
+  color: #000000;
+  font-size: 0.9rem;
+  max-width: 80%;
+  margin-top: 0.5rem;
+}
+.nutri-login-form {
+  flex: 1 1 50%;
+  padding: 3rem 2.5rem;
+}
+.nutri-form-group label {
+  font-weight: 600;
+}
+.nutri-form-group input {
+  border-radius: 8px;
+}
+.btn-nutri {
+  background-color: #28a745;
+  border-color: #28a745;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-nutri:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+.text-muted a {
+  color: #28a745;
+}
+
+
+/* ----------------------------------------
+   SECTION 10: Order Management
+---------------------------------------- */
+.admin-order-table td, .admin-order-table th {
+  vertical-align: middle;
+  padding: 12px 14px;
+}
+
+.admin-order-table td:first-child {
+  min-width: 170px;
+}
+
+
+.order-id {
+  background: #e6f4ea;
+  color: #1a7f37;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  display: inline-block;
+  max-width: 160px;
+  word-wrap: break-word;     /* ✅ break long text */
+  white-space: normal;       /* ✅ allow wrapping */
+  line-height: 1.3;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #000000;
+
+  /* ✅ Add these two: */
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* ✅ Final status colors */
+.status.pending {
+  background-color: #e2e3e5;
+  color: #6c757d;
+}
+
+.status.to-ship {
+  background-color: #fdf5d0;
+  color: #856404;
+}
+
+.status.completed {
+  background-color: #e6f4ea;
+  color: #1a7f37;
+}
+
+.status.return-refund {
+  background-color: #ffe5f1;
+  color: #c2185b;
+}
+
+.status.cancelled {
+  background-color: #fce8e6;
+  color: #d93025;
+}
+
+
+/* pagination */
+.pagination .page-link {
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  color: #007bff;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.pagination .page-item .page-link svg {
+  width: 1em;
+  height: 1em;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  background-color: #f1f1f1;
+  border-color: #dee2e6;
+  color: #6c757d;
+}
+
+.dropdown-hover:hover {
+  background-color: #f8f9fa;
+}
+
+/* ----------------------------------------
+   SECTION 10.1: Order Status Pills (New)
+---------------------------------------- */
+.status-select.to-ship {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.status-select.paid {
+  background-color: #0dcaf0;
+  color: #000;
+}
+
+.status-select.completed {
+  background-color: #198754;
+  color: #fff;
+}
+
+.status-select.cancelled {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.status-select.pending {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.status-select.to-receive {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.status-select.return-refund {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+/* 🛑 Prevent dropdown options from inheriting the color */
+.status-select option {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* Smooth transition when status-select color changes */
+.status-select {
+  transition: background-color 0.3s ease;
+}
+
+
+
+/* ----------------------------------------
+   SECTION 11: Admin User Viewer (Scoped)
+---------------------------------------- */
+.admin-user-avatar {
+  width: 64px;
+  height: 64px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.card h4 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.card p {
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+.admin-user-profile .card dl dt {
+  font-weight: 600;
+  color: #333;
+}
+.admin-user-profile .card dl dd {
+  margin-bottom: 12px;
+  color: #555;
+}
+.admin-user-profile .admin-avatar-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.list-group-item-warning {
+    background-color: #fff8e1;
+}
+
+
+/* ----------------------------------------
+   SECTION 12: Dropdown Overlap Fix (Z-Index & Adaptive Position)
+---------------------------------------- */
+
+.table-responsive,
+.card-body,
+.card,
+table tbody,
+table tr {
+  overflow: visible !important;
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown-menu {
+  position: absolute !important;
+  z-index: 9999 !important;
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  visibility: visible !important;
+  transform: translateY(4px);
+  top: 100%;
+}
+
+
+.dropup .dropdown-menu[data-popper-placement^="top"],
+.dropup-on-small .dropdown-menu[data-popper-placement^="top"] {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0 !important;
+}
+
+.dropdown-toggle::after,
+.btn.dropdown-toggle::after {
+  display: none !important;
+  content: none !important;
+}
+
+.dropdown .btn {
+  padding: 4px 6px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown .btn:hover {
+  background-color: #f1f1f1;
+}
+
+form .form-select {
+  position: relative;
+  z-index: 10;
+}
+
+form .form-select:focus {
+  z-index: 9999 !important;
+  position: relative;
+}
+
+/* MODAL */
+
+.modal {
+  z-index: 1060 !important;
+}
+
+.modal-backdrop {
+  z-index: 1050 !important;
+  background-color: rgba(0, 0, 0, 0.6); /* not solid black */
+}
+
+.modal-open .modal {
+  padding-right: 0 !important;
+  overflow-y: auto;
+}
+
+/* Fix overlapping sidebar or layout elements */

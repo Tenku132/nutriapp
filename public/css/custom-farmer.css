@@ -1,0 +1,93 @@
+/* Summary Cards */
+.bg-success {
+    background-color: #17631d !important;
+}
+
+.bg-dark {
+    background-color: #153f20 !important;
+    min-height: 260px; /* Fix for clipped content */
+}
+
+.card .fw-bold {
+    font-size: 2rem;
+}
+
+.card p {
+    font-size: 1rem;
+}
+
+/* Dashboard Labels */
+h5.fw-bold {
+    font-size: 1.25rem;
+}
+
+/* Sales Chart Canvas */
+canvas#salesChart {
+    border-radius: 8px;
+    width: 100% !important;
+    height: 200px !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Best Selling Section */
+.best-selling-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.best-selling-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.best-selling-item img {
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+
+/* Sidebar */
+.sidebar .nav-link.active {
+    background-color: #0c3d1d !important;
+    color: #fff;
+}
+.sidebar .nav-link:hover {
+    background-color: #17631d;
+    color: #fff;
+}
+.sidebar .logo img {
+    max-width: 50px;
+    margin-bottom: 5px;
+}
+.sidebar .logo {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Typography */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Optional card hover effect */
+.bg-success, .bg-dark {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+.bg-success:hover, .bg-dark:hover {
+    transform: translateY(-3px);
+}
+
+/* Footer */
+.footer {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.product-info p,
+.product-info h4 {
+    line-height: 1.5;
+}
