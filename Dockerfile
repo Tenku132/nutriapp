@@ -17,18 +17,18 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
-# ✅ Create .env and generate Laravel app key
+# ✅ Install PHP dependencies first (so autoload.php exists)
+RUN composer install --no-dev --optimize-autoloader
+
+# ✅ Then setup Laravel environment
 RUN cp .env.example .env
 RUN php artisan key:generate
 RUN php artisan config:cache
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
-
 # Fix permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Tell Apache to use Laravel's public directory
+# Point Apache to Laravel's public directory
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 # Expose port
