@@ -13,12 +13,27 @@
 
 @section('content')
 <div class="container-fluid">
+
+    @if (!auth()->user()->is_verified)
+        <div class="alert alert-warning d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>
+                Your account is not verified. Some features are disabled.
+            </div>
+            <a href="{{ route('farmer.settings') }}" class="btn btn-sm btn-outline-success">
+                Go to Settings
+            </a>
+        </div>
+    @endif
+
+
     <h2 class="fw-bold text-success mb-4">DASHBOARD</h2>
 
     {{-- ✅ Dashboard Metrics --}}
     <div class="row row-cols-2 row-cols-md-5 g-4 mb-4">
         <div class="col">
-            <div class="card bg-success text-white text-center p-3">
+            <div class="card bg-success text-white text-center p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <div class="mb-1"><i class="bi bi-cart-check-fill fs-4"></i></div>
                 <h3>{{ $ordersCount }}</h3>
                 <p class="mb-1">ORDERS</p>
@@ -26,7 +41,8 @@
             </div>
         </div>
         <div class="col">
-            <div class="card bg-success text-white text-center p-3">
+            <div class="card bg-success text-white text-center p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <div class="mb-1"><i class="bi bi-chat-dots-fill fs-4"></i></div>
                 <h3>{{ $messagesCount }}</h3>
                 <p class="mb-1">MESSAGES</p>
@@ -34,7 +50,8 @@
             </div>
         </div>
         <div class="col">
-            <div class="card bg-success text-white text-center p-3">
+            <div class="card bg-success text-white text-center p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <div class="mb-1"><i class="bi bi-cash-stack fs-4"></i></div>
                 <h3>{{ $refundCount }}</h3>
                 <p class="mb-1">REFUND</p>
@@ -42,7 +59,8 @@
             </div>
         </div>
         <div class="col">
-            <div class="card bg-success text-white text-center p-3">
+            <div class="card bg-success text-white text-center p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <div class="mb-1"><i class="bi bi-box-seam fs-4"></i></div>
                 <h3>{{ $soldOutCount }}</h3>
                 <p class="mb-1">SOLD OUT</p>
@@ -50,7 +68,8 @@
             </div>
         </div>
         <div class="col">
-            <div class="card bg-success text-white text-center p-3">
+            <div class="card bg-success text-white text-center p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <div class="mb-1"><i class="bi bi-people-fill fs-4"></i></div>
                 <h3>{{ $followerCount }}</h3>
                 <p class="mb-1">FOLLOWERS</p>
@@ -88,7 +107,8 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card bg-dark text-white p-3">
+            <div class="card bg-dark text-white p-3 {{ !auth()->user()->is_verified ? 'opacity-50' : '' }}">
+
                 <h5 class="fw-bold mb-3"><i class="bi bi-award-fill me-2"></i>BEST SELLING</h5>
                 @foreach ($topProducts as $product)
                     <div class="d-flex align-items-start mb-3">

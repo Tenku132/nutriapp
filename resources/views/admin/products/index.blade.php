@@ -6,7 +6,6 @@
 <div class="container py-4 admin-dark-skin">
     <h2 class="mb-4 fw-bold text-white">Products</h2>
 
-
     <!-- ✅ Filter/Search Form -->
     <form action="{{ route('admin.products.index') }}" method="GET" class="row align-items-end g-3 mb-4">
         <div class="col-md-4">
@@ -62,6 +61,7 @@
                         <th>Stock</th>
                         <th>Price</th>
                         <th>Farmer</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,9 +78,9 @@
                                 </div>
                             </td>
                             <td>
-                                @if($product->stock <= 5)
+                                @if ($product->stock <= 5)
                                     <span class="badge bg-danger">Low stock ({{ $product->stock }})</span>
-                                @elseif($product->stock <= 20)
+                                @elseif ($product->stock <= 20)
                                     <span class="badge bg-warning text-dark">Limited ({{ $product->stock }})</span>
                                 @else
                                     <span class="badge bg-success">In stock</span>
@@ -91,21 +91,41 @@
                                 <span class="badge bg-info text-dark">{{ $product->user->name ?? 'N/A' }}</span>
                             </td>
                             <td>
-                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this product?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
+                                <span class="badge 
+                                    {{ $product->status === 'approved' ? 'bg-success' : 
+                                        ($product->status === 'rejected' ? 'bg-danger' : 'bg-secondary') }}">
+                                    {{ ucfirst($product->status) }}
+                                </span>
+                            </td>
+                            <td class="d-flex gap-1 align-items-center">
+                                @if ($product->status === 'pending')
+                                    <form action="{{ route('admin.products.approve', $product->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn btn-sm btn-success">Approve</button>
+                                    </form>
+                                    <form action="{{ route('admin.products.reject', $product->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn btn-sm btn-secondary">Reject</button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this product?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">No products available.</td>
+                            <td colspan="6" class="text-center text-muted py-4">No products available.</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -80,6 +80,7 @@ protected function casts(): array
         'is_banned' => 'boolean',
         'is_permanently_banned' => 'boolean',
         'banned_until' => 'datetime',
+        'is_verified' => 'boolean',
     ];
 }
 

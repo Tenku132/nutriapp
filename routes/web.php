@@ -26,6 +26,8 @@ use App\Http\Controllers\Farmer\FarmerDashboardController;
 use App\Http\Controllers\Farmer\FarmerProfileController;
 use App\Http\Controllers\Farmer\FarmerSettingsController;
 use App\Http\Controllers\Farmer\FarmerNotificationController;
+use App\Http\Controllers\Farmer\FarmerVerificationController;
+
 
 // 🌐 Public Pages
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -69,7 +71,8 @@ Route::prefix('farmer')->name('farmer.')->middleware(['auth', 'verified'])->grou
 
     Route::get('/settings', [FarmerSettingsController::class, 'index'])->name('settings');
     Route::patch('/settings/password', [FarmerSettingsController::class, 'updatePassword'])->name('settings.updatePassword');
-    Route::post('/settings/documents', [FarmerSettingsController::class, 'uploadDocuments'])->name('settings.uploadDocuments');
+    Route::post('/settings/documents', [FarmerVerificationController::class, 'store'])->name('settings.uploadDocuments');
+
 
     Route::get('/products/templates/{category}', [FarmerProductController::class, 'getTemplates'])->name('products.templates');
     Route::resource('products', FarmerProductController::class);

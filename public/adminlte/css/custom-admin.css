@@ -903,4 +903,21 @@ form .form-select:focus {
   overflow-y: auto;
 }
 
+
+
 /* Fix overlapping sidebar or layout elements */
+
+
+/* ICONS */
+/* Fix for Bootstrap Icons not showing */
+.bi {
+    font-family: 'bootstrap-icons' !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-size: 1rem;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

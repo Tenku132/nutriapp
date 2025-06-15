@@ -15,14 +15,13 @@ class ProductController extends Controller
 {
     protected $validCategories = ['Fruits', 'Vegetable', 'Grains', 'Spices', 'Beverages'];
 
-
     protected function validateProduct(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0.01',
             'stock' => 'required|integer|min:1',
-            'category' => 'required|in:' . implode(',', array_merge($this->validCategories, ['Beverages'])),
+            'category' => 'required|in:' . implode(',', $this->validCategories),
             'province' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
@@ -31,7 +30,6 @@ class ProductController extends Controller
             'ripeness' => 'nullable|in:Unripe,Partially Ripe,Ripe,Overripe',
             'shelf_life' => 'nullable|string|max:255',
             'storage' => 'nullable|string|max:1000',
-
         ]);
     }
 
@@ -59,11 +57,7 @@ class ProductController extends Controller
         }
 
         if ($request->filled('sort')) {
-            if ($request->sort === 'price_asc') {
-                $query->orderBy('price', 'asc');
-            } elseif ($request->sort === 'price_desc') {
-                $query->orderBy('price', 'desc');
-            }
+            $query->orderBy('price', $request->sort === 'price_asc' ? 'asc' : 'desc');
         }
 
         $products = $query->withCount(['orders as sales_count' => function ($query) {
@@ -75,12 +69,20 @@ class ProductController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->is_verified) {
+            return redirect()->route('farmer.settings')->with('error', 'Your account must be verified to add products.');
+        }
+
         $categories = $this->validCategories;
         return view('farmer.products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
+        if (!auth()->user()->is_verified) {
+            return redirect()->route('farmer.settings')->with('error', 'Only verified farmers can create products.');
+        }
+
         $this->validateProduct($request);
 
         $product = new Product($request->only([
@@ -88,11 +90,10 @@ class ProductController extends Controller
             'harvested_at', 'ripeness', 'shelf_life', 'storage'
         ]));
 
-
+        $product->status = 'pending';
         $product->farmer_id = auth()->id();
         $product->province = $request->input('province');
         $product->city = $request->input('city');
-
 
         if ($request->hasFile('image')) {
             $product->image = $request->file('image')->store('products', 'public');
@@ -115,13 +116,22 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        if (!auth()->user()->is_verified) {
+            return redirect()->route('farmer.settings')->with('error', 'You must be verified to edit products.');
+        }
+
         $product = Product::where('farmer_id', auth()->id())->findOrFail($id);
         $categories = $this->validCategories;
+
         return view('farmer.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
     {
+        if (!auth()->user()->is_verified) {
+            return redirect()->route('farmer.settings')->with('error', 'Only verified farmers can update products.');
+        }
+
         if ($product->farmer_id !== auth()->id()) {
             abort(403);
         }
@@ -133,9 +143,8 @@ class ProductController extends Controller
             'harvested_at', 'ripeness', 'shelf_life', 'storage'
         ]));
 
-$product->province = $request->input('province');
-$product->city = $request->input('city');
-
+        $product->province = $request->input('province');
+        $product->city = $request->input('city');
 
         if ($request->hasFile('image')) {
             $product->image = $request->file('image')->store('products', 'public');
@@ -166,6 +175,7 @@ $product->city = $request->input('city');
 
         return redirect()->route('farmer.products.index')->with('success', 'Selected products deleted.');
     }
+
     public function getTemplates($category)
     {
         $templateNames = DB::table('product_templates')

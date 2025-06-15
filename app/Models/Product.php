@@ -24,7 +24,9 @@ class Product extends Model
         'harvested_at',
         'shelf_life', 
         'storage',
+        'status',
     ];
+
 
 public function orders()
 {

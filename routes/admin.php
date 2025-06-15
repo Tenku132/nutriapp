@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminReportController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminReviewController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\FarmerVerificationReviewController;
 
 // ========================================================================
 // 🔐 Public Routes (No Auth Required) — Login, Register, Forgot Password
@@ -92,6 +93,10 @@ Route::middleware(['auth:admin', 'verified'])->prefix('admin')->name('admin.')->
     Route::resource('products', AdminProductController::class);
     Route::get('/products-export', [AdminProductController::class, 'export'])->name('products.export');
 
+    // ✅ Product Approval
+    Route::patch('/products/{id}/approve', [AdminProductController::class, 'approve'])->name('products.approve');
+    Route::patch('/products/{id}/reject', [AdminProductController::class, 'reject'])->name('products.reject');
+
     // 🛒 Orders
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
     Route::get('/export-sales', [AdminDashboardController::class, 'exportSales'])->name('export.sales');
@@ -107,6 +112,11 @@ Route::middleware(['auth:admin', 'verified'])->prefix('admin')->name('admin.')->
     Route::post('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('users.ban');
     Route::post('/users/{user}/unban', [AdminUserController::class, 'unban'])->name('users.unban');
     Route::get('/users-export', [AdminUserController::class, 'export'])->name('users.export');
+
+    // 📄 Farmer Verification
+    Route::get('/verifications', [FarmerVerificationReviewController::class, 'index'])->name('verifications.index');
+    Route::patch('/verifications/{id}/approve', [FarmerVerificationReviewController::class, 'approve'])->name('verifications.approve');
+    Route::patch('/verifications/{id}/reject', [FarmerVerificationReviewController::class, 'reject'])->name('verifications.reject');
 
     // 🌟 Reviews & Ratings
     Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');

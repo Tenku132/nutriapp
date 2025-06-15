@@ -109,9 +109,18 @@
       <option value="sold_out">Sold Out</option>
     </select>
   </div>
-  <a href="{{ route('farmer.products.create') }}" class="btn btn-success">
-    <i class="bi bi-plus-lg"></i> Add Product
-  </a>
+  @php $isVerified = auth()->user()->is_verified; @endphp
+
+  @if ($isVerified)
+    <a href="{{ route('farmer.products.create') }}" class="btn btn-success">
+      <i class="bi bi-plus-lg"></i> Add Product
+    </a>
+  @else
+    <button class="btn btn-secondary" disabled data-bs-toggle="tooltip" title="Account verification required to add products.">
+      <i class="bi bi-lock-fill"></i> Add Product
+    </button>
+  @endif
+
 </div>
 
 <div class="product-list-container">

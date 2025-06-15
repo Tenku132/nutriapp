@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\ProductApprovedNotification;
+use App\Notifications\ProductRejectedNotification;
 
 class AdminProductController extends Controller
 {
@@ -120,6 +122,31 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
     }
+
+    public function approve($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->status = 'approved';
+        $product->save();
+
+        // Send notification to the farmer
+        $product->user->notify(new ProductApprovedNotification($product));
+
+        return redirect()->route('admin.products.index')->with('success', 'Product approved successfully.');
+    }
+
+    public function reject($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->status = 'rejected';
+        $product->save();
+
+        // Send notification to the farmer
+        $product->user->notify(new ProductRejectedNotification($product));
+
+        return redirect()->route('admin.products.index')->with('error', 'Product rejected.');
+    }
+
 
     public function export()
 {

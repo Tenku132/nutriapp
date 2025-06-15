@@ -1,29 +1,17 @@
 <div class="mb-3" id="template-name-wrapper" style="display: none;">
   <label for="template-name" class="form-label fw-bold">Product Name</label>
   <select id="template-name" class="form-select">
-    <option value="">Select product name</option>
+    <option value="" >Select product name</option>
   </select>
 </div>
 
 <div class="mb-3" id="manual-name-wrapper" style="display: none;">
   <label for="manual-name" class="form-label fw-bold">Enter Product Name</label>
   <input type="text" class="form-control" name="name" id="manual-name"
-         placeholder="Enter product name manually">
+         placeholder="Enter product name manually" >
 </div>
 
 <div class="row">
-  <div class="col-md-4 mb-3">
-    <label for="price" class="form-label fw-bold">Price (₱) <span class="text-danger">*</span></label>
-    <input type="number" class="form-control" name="price" id="price"
-           value="{{ old('price', $product->price ?? '') }}" step="0.01" min="0" required
-           placeholder="e.g. 99.00">
-  </div>
-  <div class="col-md-4 mb-3">
-    <label for="stock" class="form-label fw-bold">Stock (kilo) <span class="text-danger">*</span></label>
-    <input type="number" class="form-control" name="stock" id="stock"
-           value="{{ old('stock', $product->stock ?? '') }}" min="0" required
-           placeholder="Enter available stock">
-  </div>
   <div class="col-md-4 mb-3">
     <label for="category" class="form-label fw-bold">Category <span class="text-danger">*</span></label>
     <select class="form-select" name="category" id="category" required>
@@ -36,6 +24,20 @@
       @endforeach
     </select>
   </div>
+
+  <div class="col-md-4 mb-3">
+    <label for="price" class="form-label fw-bold">Price (₱) <span class="text-danger">*</span></label>
+    <input type="number" class="form-control" name="price" id="price"
+           value="{{ old('price', $product->price ?? '') }}" step="0.01" min="0" required
+           placeholder="e.g. 99.00">
+  </div>
+  <div class="col-md-4 mb-3">
+    <label for="stock" class="form-label fw-bold">Stock (kilo) <span class="text-danger">*</span></label>
+    <input type="number" class="form-control" name="stock" id="stock"
+           value="{{ old('stock', $product->stock ?? '') }}" min="0" required
+           placeholder="Enter available stock">
+  </div>
+
 </div>
 
 <div class="mb-3">

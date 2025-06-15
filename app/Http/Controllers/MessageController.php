@@ -10,8 +10,19 @@ use App\Notifications\NewMessageNotification;
 
 class MessageController extends Controller
 {
+    // Restrict messaging access for unverified farmers
+    protected function restrictUnverifiedFarmer()
+    {
+        if (Auth::user()->role === 'farmer' && !Auth::user()->is_verified) {
+            return redirect()->route('farmer.settings')->with('error', 'Please verify your account to access messaging.');
+        }
+        return null;
+    }
+
     public function inbox()
     {
+        if ($redirect = $this->restrictUnverifiedFarmer()) return $redirect;
+
         $userId = Auth::id();
 
         $conversations = Message::where('sender_id', $userId)
@@ -29,6 +40,8 @@ class MessageController extends Controller
 
     public function show($userId)
     {
+        if ($redirect = $this->restrictUnverifiedFarmer()) return $redirect;
+
         $authId = Auth::id();
 
         $messages = Message::where(function ($q) use ($authId, $userId) {
@@ -50,12 +63,14 @@ class MessageController extends Controller
         return view($view, [
             'messages' => $messages,
             'conversations' => $conversations,
-            'userId' => $userId // ✅ renamed from receiverId
+            'userId' => $userId
         ]);
     }
 
     public function reply(Request $request, $userId)
     {
+        if ($redirect = $this->restrictUnverifiedFarmer()) return $redirect;
+
         $request->validate([
             'message' => 'required|string|max:1000',
         ]);
@@ -72,7 +87,7 @@ class MessageController extends Controller
 
         $receiver->notify(new NewMessageNotification([
             'sender' => $senderName,
-            'sender_id' => Auth::id()  // this fixes the undefined index error
+            'sender_id' => Auth::id()
         ]));
 
         $route = Auth::user()->role === 'farmer' ? 'farmer.messages.show' : 'buyer.messages.show';
@@ -81,6 +96,8 @@ class MessageController extends Controller
 
     public function create()
     {
+        if ($redirect = $this->restrictUnverifiedFarmer()) return $redirect;
+
         $role = Auth::user()->role;
         $users = $role === 'farmer'
             ? User::where('role', 'buyer')->get()
@@ -92,6 +109,8 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
+        if ($redirect = $this->restrictUnverifiedFarmer()) return $redirect;
+
         $request->validate([
             'receiver_id' => 'required|exists:users,id',
             'message' => 'required|string|max:1000',

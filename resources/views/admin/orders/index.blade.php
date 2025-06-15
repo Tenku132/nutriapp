@@ -120,7 +120,7 @@
 
 <!-- Change Status Modal -->
 <div class="modal fade" id="orderActionModal" tabindex="-1" aria-labelledby="orderActionModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <form id="order-action-form" method="POST">
         @csrf
