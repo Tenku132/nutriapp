@@ -16,10 +16,24 @@ until nc -z "$DB_HOST" "$DB_PORT"; do
   fi
 done
 
+# Ensure .env file exists
+if [ ! -f .env ]; then
+  echo "⚙️  No .env file found. Copying from .env.example..."
+  cp .env.example .env
+fi
+
 # Run Laravel setup
 echo "🔧 Running Laravel setup..."
-php artisan migrate --force || true
-php artisan config:cache
+
+# Generate key only if APP_KEY is not set
+if grep -q "APP_KEY=base64" .env; then
+  echo "✅ APP_KEY already set. Skipping key:generate."
+else
+  php artisan key:generate || echo "⚠️ key:generate failed"
+fi
+
+php artisan migrate --force || echo "⚠️ migrate failed"
+php artisan config:cache || echo "⚠️ config:cache failed"
 
 # Fix file permissions (extra safety)
 chmod -R 775 storage bootstrap/cache || true
