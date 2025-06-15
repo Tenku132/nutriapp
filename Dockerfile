@@ -23,7 +23,6 @@ RUN composer install --no-dev --optimize-autoloader
 # ✅ Setup Laravel environment
 RUN cp .env.example .env
 RUN php artisan key:generate
-RUN php artisan migrate --force || true  # skip error if DB not yet available
 RUN php artisan config:cache
 
 # ✅ Fix permissions
@@ -32,5 +31,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # ✅ Point Apache to Laravel's public directory
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Expose port
+# ✅ Add entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Use entrypoint to wait for DB and run migrations at runtime
+ENTRYPOINT ["/entrypoint.sh"]
+
 EXPOSE 80
